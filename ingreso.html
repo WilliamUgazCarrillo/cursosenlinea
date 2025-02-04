@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/estilos/estiloingreso.css" />
+    <title>Formulario de contacto</title>
+  </head>
+  <body>
+    <form id="miFormulario" autocomplete="off">
+      <h2>Contacto</h2>
+      
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        required
+        placeholder="nombre"
+      /><br /><br />
+
+      
+      <input
+        type="text"
+        id="apellido"
+        name="apellido"
+        required
+        placeholder="apellido"
+      /><br /><br />
+
+ 
+      <input
+        type="text"
+        id="telefono"
+        name="telefono"
+        required
+        placeholder="teléfono"
+      />
+      <br /><br />
+
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="correo electronico"
+      /><br /><br />
+
+      <button type="submit" id="btn">Guardar</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("miFormulario")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+
+          const nombre = document.getElementById("nombre").value.toUpperCase(); // Convertir a mayúsculas
+          const apellido = document
+            .getElementById("apellido")
+            .value.toUpperCase(); // Convertir a mayúsculas
+          const telefono = document.getElementById("telefono").value; // No se convierte a mayúsculas
+          const email = document.getElementById("email").value; // No se convierte a mayúsculas
+
+          // Envía los datos al servidor
+          fetch("http://localhost:3000/guardar", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ nombre, apellido, telefono, email }),
+          })
+            .then((response) => response.text())
+            .then((data) => {
+              //alert(data); // Muestra un mensaje de éxito
+              //limpia los datos del formulario
+              document.getElementById('miFormulario').reset();
+              window.location.href = "https://go.hotmart.com/I97330913T"; // Redirige a otra página
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
+  </body>
+</html>
