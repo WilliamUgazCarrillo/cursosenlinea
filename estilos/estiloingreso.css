@@ -51,16 +51,16 @@ input{
 }
 
 #telefono{
-    width: 500px;
+    width: 550px;
 }
 #email{
     width: 750px;
 }
 #nombre{
-    width: 600px;
+    width: 650px;
 }
 #apellido{
-    width: 600px;
+    width: 650px;
 }
 ::placeholder{
     background-color: rgb(126, 123, 123);
@@ -82,7 +82,22 @@ input{
     background-color: rgb(181, 212, 39);
     border: 5px solid rgb(181, 212, 39);
 }
-
+#mensaje {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .éxito {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
 
 @media (max-width:720px){
     body{
@@ -105,4 +120,25 @@ input{
     form h2{
         font-size: 50px;
     }
+
+
+   
+    /* Estilos para los mensajes */
+    #mensaje {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .éxito {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
 }

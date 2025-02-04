@@ -9,57 +9,34 @@
   <body>
     <form id="miFormulario" autocomplete="off">
       <h2>Contacto</h2>
-      
-      <input
-        type="text"
-        id="nombre"
-        name="nombre"
-        required
-        placeholder="nombre"
-      /><br /><br />
 
-      
-      <input
-        type="text"
-        id="apellido"
-        name="apellido"
-        required
-        placeholder="apellido"
-      /><br /><br />
+      <input  type="text" id="nombre"   name="nombre" required placeholder="nombre"/><br /><br />
+      <input  type="text" id="apellido" name="apellido" required placeholder="apellido"/><br /><br />
+      <input  type="text" id="telefono" name="telefono" required placeholder="teléfono"/> <br /><br />
+      <input  type="email" id="email"   name="email"    required placeholder="correo electronico"/><br /><br />
 
- 
-      <input
-        type="text"
-        id="telefono"
-        name="telefono"
-        required
-        placeholder="teléfono"
-      />
-      <br /><br />
-
-      <input
-        type="email"
-        id="email"
-        name="email"
-        required
-        placeholder="correo electronico"
-      /><br /><br />
-
-      <button type="submit" id="btn">Guardar</button>
+      <button type="submit" id="btn">Ir al vendedor</button>
     </form>
 
     <script>
-      document
-        .getElementById("miFormulario")
-        .addEventListener("submit", function (event) {
+      document.getElementById("miFormulario").addEventListener("submit", function (event) {
           event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
 
           const nombre = document.getElementById("nombre").value.toUpperCase(); // Convertir a mayúsculas
-          const apellido = document
-            .getElementById("apellido")
-            .value.toUpperCase(); // Convertir a mayúsculas
-          const telefono = document.getElementById("telefono").value; // No se convierte a mayúsculas
-          const email = document.getElementById("email").value; // No se convierte a mayúsculas
+          const apellido = document.getElementById("apellido").value.toUpperCase(); // Convertir a mayúsculas
+          const telefono = document.getElementById("telefono").value;
+          const email = document.getElementById("email").value;
+
+          // Validación adicional
+          if (!/^\d+$/.test(telefono)) {
+            mostrarMensaje("El teléfono solo debe contener números.", "error");
+            return;
+          }
+
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            mostrarMensaje("Por favor, ingresa un correo electrónico válido.", "error");
+            return;
+          }
 
           // Envía los datos al servidor
           fetch("http://localhost:3000/guardar", {
@@ -71,15 +48,26 @@
           })
             .then((response) => response.text())
             .then((data) => {
-              //alert(data); // Muestra un mensaje de éxito
-              //limpia los datos del formulario
-              document.getElementById('miFormulario').reset();
-              window.location.href = "https://go.hotmart.com/I97330913T"; // Redirige a otra página
+              mostrarMensaje("Datos guardados correctamente. Redirigiendo...", "éxito");
+              document.getElementById("miFormulario").reset(); // Limpia el formulario
+              setTimeout(() => {
+                window.location.href = "https://go.hotmart.com/I97330913T"; // Redirige después de 2 segundos
+              }, 2000);
             })
             .catch((error) => {
+              mostrarMensaje("Error al guardar los datos. Inténtalo de nuevo.", "error");
               console.error("Error:", error);
             });
         });
+
+      // Función para mostrar mensajes al usuario
+      function mostrarMensaje(mensaje, tipo) {
+        const mensajeDiv = document.getElementById("mensaje");
+        mensajeDiv.textContent = mensaje;
+        mensajeDiv.className = tipo; // Añade una clase para estilos (éxito o error)
+      }
     </script>
+
+
   </body>
 </html>
