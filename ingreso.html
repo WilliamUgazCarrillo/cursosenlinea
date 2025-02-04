@@ -24,12 +24,12 @@
 
           const nombre = document.getElementById("nombre").value.toUpperCase(); // Convertir a mayúsculas
           const apellido = document.getElementById("apellido").value.toUpperCase(); // Convertir a mayúsculas
-          const telefono = document.getElementById("telefono").value;
+          const telefono = document.getElementById("telefono").value.replace(/\D/g, ""); // Elimina todo lo que no sea número
           const email = document.getElementById("email").value;
 
           // Validación adicional
-          if (!/^\d+$/.test(telefono)) {
-            mostrarMensaje("El teléfono solo debe contener números.", "error");
+          if (!telefono) {
+            mostrarMensaje("Por favor, ingresa un número de teléfono válido.", "error");
             return;
           }
 

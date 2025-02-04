@@ -23,7 +23,7 @@ connection.connect((err) => {
 });
 
 // Ruta GET para /guardar
-app.get('/guardar', (req, res) => {
+app.post('/guardar', (req, res) => {
   res.send('Esta ruta solo acepta solicitudes POST. Usa el formulario para enviar datos.');
 });
 
