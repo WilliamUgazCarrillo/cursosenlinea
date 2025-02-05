@@ -23,13 +23,14 @@ connection.connect((err) => {
 });
 
 // Ruta GET para /guardar
-app.post('/guardar', (req, res) => {
+app.get('/guardar', (req, res) => {
   res.send('Esta ruta solo acepta solicitudes POST. Usa el formulario para enviar datos.');
 });
 
 // Ruta POST para /guardar
 app.post('/guardar', (req, res) => {
   const { nombre, apellido, telefono, email } = req.body;
+  console.log("Datos recibidos:", { nombre, apellido, telefono, email });
 
   const query = 'INSERT INTO cliente (nombre, apellido, telefono, email) VALUES (?, ?, ?, ?)';
   connection.query(query, [nombre, apellido, telefono, email], (err, result) => {

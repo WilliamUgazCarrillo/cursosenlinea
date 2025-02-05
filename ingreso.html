@@ -10,10 +10,10 @@
     <form id="miFormulario" autocomplete="off">
       <h2>Contacto</h2>
 
-      <input  type="text" id="nombre"   name="nombre" required placeholder="nombre"/><br /><br />
-      <input  type="text" id="apellido" name="apellido" required placeholder="apellido"/><br /><br />
-      <input  type="text" id="telefono" name="telefono" required placeholder="teléfono"/> <br /><br />
-      <input  type="email" id="email"   name="email"    required placeholder="correo electronico"/><br /><br />
+      <input type="text" id="nombre" name="nombre" required placeholder="Nombre" /><br /><br />
+      <input type="text" id="apellido" name="apellido" required placeholder="Apellido" /><br /><br />
+      <input type="text" id="telefono" name="telefono" required placeholder="Teléfono" /><br /><br />
+      <input type="email" id="email" name="email" required placeholder="Correo electrónico" /><br /><br />
 
       <button type="submit" id="btn">Ir al vendedor</button>
     </form>
@@ -29,12 +29,12 @@
 
           // Validación adicional
           if (!telefono) {
-            mostrarMensaje("Por favor, ingresa un número de teléfono válido.", "error");
+            alert("Por favor, ingresa un número de teléfono válido.");
             return;
           }
 
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            mostrarMensaje("Por favor, ingresa un correo electrónico válido.", "error");
+            alert("Por favor, ingresa un correo electrónico válido.");
             return;
           }
 
@@ -48,26 +48,17 @@
           })
             .then((response) => response.text())
             .then((data) => {
-              mostrarMensaje("Datos guardados correctamente. Redirigiendo...", "éxito");
+              alert("Datos guardados correctamente. Redirigiendo...");
               document.getElementById("miFormulario").reset(); // Limpia el formulario
               setTimeout(() => {
                 window.location.href = "https://go.hotmart.com/I97330913T"; // Redirige después de 2 segundos
               }, 2000);
             })
             .catch((error) => {
-              mostrarMensaje("Error al guardar los datos. Inténtalo de nuevo.", "error");
+              alert("Error al guardar los datos. Inténtalo de nuevo.");
               console.error("Error:", error);
             });
         });
-
-      // Función para mostrar mensajes al usuario
-      function mostrarMensaje(mensaje, tipo) {
-        const mensajeDiv = document.getElementById("mensaje");
-        mensajeDiv.textContent = mensaje;
-        mensajeDiv.className = tipo; // Añade una clase para estilos (éxito o error)
-      }
     </script>
-
-
   </body>
 </html>
